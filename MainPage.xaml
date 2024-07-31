@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TodoList.MainPage"
+             xmlns:ViewModel="clr-namespace:TodoList.ViewModel"
+             x:DataType="ViewModel:MainPageViewModel"
+             xmlns:Model="clr-namespace:TodoList.Model"
+             BackgroundColor="#1e1e1e">
+    <StackLayout Padding="25">
+        <Grid RowDefinitions="auto,auto,auto,auto,auto,auto" RowSpacing="10">
+            <Grid ColumnDefinitions="auto,2*,*" HeightRequest="60" WidthRequest="360">
+                <Ellipse WidthRequest="50" HeightRequest="50" Stroke="White"
+                         HorizontalOptions="Start" BackgroundColor="#383838"/>
+                <Label Text="Ou sisaina" FontSize="20" VerticalOptions="Center"
+                       Grid.Column="1" Margin="10"/>
+                <Grid HorizontalOptions="End" Grid.Column="2">
+                    <Button HeightRequest="35" WidthRequest="35" BackgroundColor="#bb86fc"
+                            Pressed="Button_Pressed" CornerRadius="50"
+                            Command="{Binding AddTaskCommand}"/>
+                    <Label Text="+" HorizontalOptions="Center" VerticalOptions="Center"
+                           TextColor="Black" FontSize="30"/>
+                </Grid>
+            </Grid>
+            <Border StrokeShape="RoundRectangle 2" HeightRequest="200" 
+                    BackgroundColor="#383838" Grid.Row="1" Stroke="#383838">
+                <Grid ColumnDefinitions="*,*">
+                    <Grid RowDefinitions="*,2*">
+                        <Label Text="User portfolio" Margin="15,10,10,10"
+                           TextColor="White" FontSize="20"/>
+                        <FlexLayout Grid.Row="1" Direction="Column" JustifyContent="SpaceEvenly" Margin="20,10,10,10">
+                            <HorizontalStackLayout>
+                                <Rectangle BackgroundColor="White" HeightRequest="20" WidthRequest="20"/>
+                                <Label Text="To do" Margin="10,0,0,0"/>
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout>
+                                <Rectangle BackgroundColor="#bb86fc" HeightRequest="20" WidthRequest="20"/>
+                                <Label Text="In Progress" Margin="10,0,0,0"/>
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout>
+                                <Rectangle BackgroundColor="#cf6679" HeightRequest="20" WidthRequest="20"/>
+                                <Label Text="Review" Margin="10,0,0,0"/>
+                            </HorizontalStackLayout>
+                            <HorizontalStackLayout>
+                                <Rectangle BackgroundColor="#03dac5" HeightRequest="20" WidthRequest="20"/>
+                                <Label Text="Done" Margin="10,0,0,0"/>
+                            </HorizontalStackLayout>
+                        </FlexLayout>
+                    </Grid>
+                    <Ellipse HeightRequest="150" WidthRequest="150"
+                         Stroke="White" Grid.Column="1"/>
+                </Grid>
+            </Border>
+            <CollectionView HeightRequest="130" ItemsSource="{Binding Categories}" Grid.Row="2">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal"/>
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="ViewModel:MainPageViewModel">
+                        <Frame WidthRequest="115" CornerRadius="2" BorderColor="Transparent" BackgroundColor="#00b3a6" Margin="3">
+                            <Label Text="{Binding .}" TextColor="Black" FontSize="16" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Grid Grid.Row="3">
+                <Border Stroke="White" BackgroundColor="#383838" StrokeShape="RoundRectangle 28">
+                    <SearchBar/>
+                </Border>
+            </Grid>
+            <CollectionView ItemsSource="{Binding Tasks}" Grid.Row="4" HeightRequest="250" WidthRequest="360">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="Model:TaskProperty">
+                        <FlexLayout Direction="Column">
+                            <Frame BackgroundColor="#bb86fc" CornerRadius="2" WidthRequest="360" HeightRequest="50" Margin="0,0,0,0" Padding="15,10">
+                                <Label Text="{Binding Title}" TextColor="Black" FontAttributes="Bold" FontSize="20" VerticalTextAlignment="Center"/>
+                            </Frame>
+                        </FlexLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </Grid>
+    </StackLayout>
+</ContentPage>
