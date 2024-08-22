@@ -6,7 +6,8 @@
         {
             InitializeComponent();
 
-            Routing.RegisterRoute(nameof(AddTaskPage), typeof(AddTaskPage));
+            Routing.RegisterRoute(nameof(ViewPage), typeof(ViewPage));
+            Routing.RegisterRoute(nameof(ModifyPage), typeof(ModifyPage));
         }
     }
 }

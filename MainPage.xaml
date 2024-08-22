@@ -7,80 +7,170 @@
              xmlns:Model="clr-namespace:TodoList.Model"
              BackgroundColor="#1e1e1e">
     <StackLayout Padding="25">
-        <Grid RowDefinitions="auto,auto,auto,auto,auto,auto" RowSpacing="10">
-            <Grid ColumnDefinitions="auto,2*,*" HeightRequest="60" WidthRequest="360">
-                <Ellipse WidthRequest="50" HeightRequest="50" Stroke="White"
+        <StackLayout IsVisible="{Binding IsMainPage}">
+            <Grid RowDefinitions="auto,auto,auto,auto,auto,auto" RowSpacing="10">
+                <Grid ColumnDefinitions="auto,2*,*" HeightRequest="60" WidthRequest="360">
+                    <Ellipse WidthRequest="50" HeightRequest="50" Stroke="White"
                          HorizontalOptions="Start" BackgroundColor="#383838"/>
-                <Label Text="Ou sisaina" FontSize="20" VerticalOptions="Center"
+                    <Label Text="Ou sisaina" FontSize="20" VerticalOptions="Center"
                        Grid.Column="1" Margin="10"/>
-                <Grid HorizontalOptions="End" Grid.Column="2">
-                    <Button HeightRequest="35" WidthRequest="35" BackgroundColor="#bb86fc"
+                    <Grid HorizontalOptions="End" Grid.Column="2">
+                        <Button HeightRequest="35" WidthRequest="35" BackgroundColor="#bb86fc"
                             Pressed="Button_Pressed" CornerRadius="50"
-                            Command="{Binding AddTaskCommand}"/>
-                    <Label Text="+" HorizontalOptions="Center" VerticalOptions="Center"
+                            Command="{Binding GotoAddPageCommand}"/>
+                        <Label Text="+" HorizontalOptions="Center" VerticalOptions="Center"
                            TextColor="Black" FontSize="30"/>
-                </Grid>
-            </Grid>
-            <Border StrokeShape="RoundRectangle 2" HeightRequest="200" 
-                    BackgroundColor="#383838" Grid.Row="1" Stroke="#383838">
-                <Grid ColumnDefinitions="*,*">
-                    <Grid RowDefinitions="*,2*">
-                        <Label Text="User portfolio" Margin="15,10,10,10"
-                           TextColor="White" FontSize="20"/>
-                        <FlexLayout Grid.Row="1" Direction="Column" JustifyContent="SpaceEvenly" Margin="20,10,10,10">
-                            <HorizontalStackLayout>
-                                <Rectangle BackgroundColor="White" HeightRequest="20" WidthRequest="20"/>
-                                <Label Text="To do" Margin="10,0,0,0"/>
-                            </HorizontalStackLayout>
-                            <HorizontalStackLayout>
-                                <Rectangle BackgroundColor="#bb86fc" HeightRequest="20" WidthRequest="20"/>
-                                <Label Text="In Progress" Margin="10,0,0,0"/>
-                            </HorizontalStackLayout>
-                            <HorizontalStackLayout>
-                                <Rectangle BackgroundColor="#cf6679" HeightRequest="20" WidthRequest="20"/>
-                                <Label Text="Review" Margin="10,0,0,0"/>
-                            </HorizontalStackLayout>
-                            <HorizontalStackLayout>
-                                <Rectangle BackgroundColor="#03dac5" HeightRequest="20" WidthRequest="20"/>
-                                <Label Text="Done" Margin="10,0,0,0"/>
-                            </HorizontalStackLayout>
-                        </FlexLayout>
                     </Grid>
-                    <Ellipse HeightRequest="150" WidthRequest="150"
-                         Stroke="White" Grid.Column="1"/>
                 </Grid>
-            </Border>
-            <CollectionView HeightRequest="130" ItemsSource="{Binding Categories}" Grid.Row="2">
-                <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Horizontal"/>
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="ViewModel:MainPageViewModel">
-                        <Frame WidthRequest="115" CornerRadius="2" BorderColor="Transparent" BackgroundColor="#00b3a6" Margin="3">
-                            <Label Text="{Binding .}" TextColor="Black" FontSize="16" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
-                        </Frame>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-            <Grid Grid.Row="3">
-                <Border Stroke="White" BackgroundColor="#383838" StrokeShape="RoundRectangle 28">
-                    <SearchBar/>
+                <Border StrokeShape="RoundRectangle 2" HeightRequest="200" 
+                    BackgroundColor="#383838" Grid.Row="1" Stroke="#383838">
+                    <Grid ColumnDefinitions="*,*">
+                        <Grid RowDefinitions="*,2*">
+                            <Label Text="User portfolio" Margin="15,10,10,10"
+                            TextColor="White" FontSize="20"/>
+                            <FlexLayout Grid.Row="1" Direction="Column" JustifyContent="SpaceEvenly" Margin="20,10,10,10">
+                                <HorizontalStackLayout>
+                                    <Rectangle BackgroundColor="White" HeightRequest="20" WidthRequest="20"/>
+                                    <Label Text="To do" Margin="10,0,0,0"/>
+                                </HorizontalStackLayout>
+                                <HorizontalStackLayout>
+                                    <Rectangle BackgroundColor="#bb86fc" HeightRequest="20" WidthRequest="20"/>
+                                    <Label Text="In Progress" Margin="10,0,0,0"/>
+                                </HorizontalStackLayout>
+                                <HorizontalStackLayout>
+                                    <Rectangle BackgroundColor="#cf6679" HeightRequest="20" WidthRequest="20"/>
+                                    <Label Text="Review" Margin="10,0,0,0"/>
+                                </HorizontalStackLayout>
+                                <HorizontalStackLayout>
+                                    <Rectangle BackgroundColor="#03dac5" HeightRequest="20" WidthRequest="20"/>
+                                    <Label Text="Done" Margin="10,0,0,0"/>
+                                </HorizontalStackLayout>
+                            </FlexLayout>
+                        </Grid>
+                        <Ellipse HeightRequest="150" WidthRequest="150"
+                         Stroke="White" Grid.Column="1"/>
+                    </Grid>
                 </Border>
-            </Grid>
-            <CollectionView ItemsSource="{Binding Tasks}" Grid.Row="4" HeightRequest="250" WidthRequest="360">
-                <CollectionView.ItemsLayout>
-                    <LinearItemsLayout Orientation="Vertical" />
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="Model:TaskProperty">
-                        <FlexLayout Direction="Column">
-                            <Frame BackgroundColor="#bb86fc" CornerRadius="2" WidthRequest="360" HeightRequest="50" Margin="0,0,0,0" Padding="15,10">
-                                <Label Text="{Binding Title}" TextColor="Black" FontAttributes="Bold" FontSize="20" VerticalTextAlignment="Center"/>
+                <CollectionView HeightRequest="130" ItemsSource="{Binding TaskBank.Categories}" Grid.Row="2">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Horizontal"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="ViewModel:MainPageViewModel">
+                            <Frame WidthRequest="115" CornerRadius="2" BorderColor="Transparent" BackgroundColor="#00b3a6" Margin="3">
+                                <Label Text="{Binding .}" TextColor="Black" FontSize="16" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center"/>
                             </Frame>
-                        </FlexLayout>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-        </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <Grid Grid.Row="3">
+                    <Border Stroke="White" BackgroundColor="#383838" StrokeShape="RoundRectangle 28">
+                        <SearchBar/>
+                    </Border>
+                </Grid>
+                <CollectionView ItemsSource="{Binding Tasks}" Grid.Row="4" HeightRequest="250" WidthRequest="360">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="Model:TaskProperty">
+                            <SwipeView>
+                                <SwipeView.RightItems>
+                                    <SwipeItems Mode="Reveal">
+                                        <SwipeItem Text="Delete" BackgroundColor="#cf6679"
+                                                   Command="{Binding Source={RelativeSource AncestorType={x:Type ViewModel:MainPageViewModel}}, Path=DeleteTaskCommand}"
+                                                   CommandParameter="{Binding Id}" />
+                                    </SwipeItems>
+                                </SwipeView.RightItems>
+                                <FlexLayout Direction="Column">
+                                    <Frame BackgroundColor="#bb86fc" CornerRadius="2" WidthRequest="360" HeightRequest="50" Margin="0,0,0,0" Padding="15,10">
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type ViewModel:MainPageViewModel}}, Path=GotoViewPageCommand}"
+                                                              CommandParameter="{Binding Id}"/>
+                                        </Frame.GestureRecognizers>
+                                        <Grid>
+                                            <Label Text="{Binding Title}" TextColor="Black" FontAttributes="Bold" FontSize="20" VerticalTextAlignment="Center"/>
+                                            <Image Source="modify_pencil.png" HorizontalOptions="End">
+                                                <Image.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type ViewModel:MainPageViewModel}}, Path=GotoModifyPageCommand}"
+                                                                        CommandParameter="{Binding Id}"/>
+                                                </Image.GestureRecognizers>
+                                            </Image>
+                                        </Grid>
+                                    </Frame>
+                                </FlexLayout>
+                            </SwipeView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
+        </StackLayout>
+
+        <FlexLayout WidthRequest="330" Direction="Column" IsVisible="{Binding IsAddTaskPage}">
+            <Image Source="cross.png" HeightRequest="25" HorizontalOptions="Start" Opacity="0.8">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoBackCommand}"/>
+                </Image.GestureRecognizers>
+            </Image>
+            <Grid>
+                <Entry Text="{Binding TaskTitle}" Placeholder="Title" FontSize="22" Opacity="50" HeightRequest="50" WidthRequest="330" ClearButtonVisibility="WhileEditing"/>
+                <BoxView HeightRequest="10" BackgroundColor="#1e1e1e" VerticalOptions="End"/>
+            </Grid>
+            <Frame CornerRadius="2" HeightRequest="330" BackgroundColor="#383838" BorderColor="Transparent">
+                <Grid>
+                    <Entry Text="{Binding TaskDescription}" BackgroundColor="Transparent" Placeholder="Description"/>
+                    <BoxView BackgroundColor="#383838" CornerRadius="2" VerticalOptions="End" HeightRequest="10"/>
+                </Grid>
+            </Frame>
+            <Frame Padding="-10" HeightRequest="40" Margin="0,5,0,5" BackgroundColor="#bb85fc" WidthRequest="125" CornerRadius="2">
+                <Grid Padding="0,0,0,0">
+                    <Picker Title="STATUS" TitleColor="Black" TextColor="Black" FontAttributes="Bold" FontSize="12.5" VerticalOptions="Center" Margin="20,0,20,0"
+                        ItemsSource="{Binding TaskBank.Statuses}" SelectedItem="{Binding SelectedStatus}"/>
+                    <Image Source="chevron_down_v.png" HorizontalOptions="End" Margin="0,0,20,0" HeightRequest="25"/>
+                    <BoxView WidthRequest="110" HeightRequest="5" Margin="0,0,0,15" BackgroundColor="#bb85fc" VerticalOptions="End"/>
+                </Grid>
+            </Frame>
+            <Entry Text="{Binding TaskAssignee}" Placeholder="Assignee"/>
+            <Frame Padding="-10" HeightRequest="40" Margin="0,5,0,5" BackgroundColor="#bb85fc" WidthRequest="125" CornerRadius="2">
+                <Grid Padding="0,0,0,0">
+                    <Picker Title="PRIORITY" TitleColor="Black" TextColor="Black" FontAttributes="Bold" FontSize="12.5" VerticalOptions="Center" Margin="20,0,20,0"
+                        ItemsSource="{Binding TaskBank.Priorities}" SelectedItem="{Binding SelectedPriority}"/>
+                    <Image Source="chevron_down_v.png" HorizontalOptions="End" Margin="0,0,20,0" HeightRequest="25"/>
+                    <BoxView WidthRequest="110" HeightRequest="5" Margin="0,0,0,15" BackgroundColor="#bb85fc" VerticalOptions="End"/>
+                </Grid>
+            </Frame>
+            <Grid>
+                <Label Text="Date" TextColor="LightGray" Margin="5,0,0,0"/>
+                <DatePicker Date="{Binding Date}" IsEnabled="False" Margin="0,10,0,0"/>
+            </Grid>
+            <Grid>
+                <Label Text="Due Date" TextColor="LightGray" Margin="5,0,0,0"/>
+                <DatePicker Date="{Binding DueDate}" Margin="0,10,0,0"/>
+            </Grid>
+            <Grid ColumnDefinitions="*,*">
+                <Frame Padding="-10" HeightRequest="40" Margin="0,5,0,5" BackgroundColor="#bb85fc" WidthRequest="125" CornerRadius="2" HorizontalOptions="Start">
+                    <Grid Padding="0,0,0,0">
+                        <Picker Title="CATEGORY" TitleColor="Black" TextColor="Black" FontAttributes="Bold" FontSize="12.5" VerticalOptions="Center" Margin="20,0,20,0"
+                ItemsSource="{Binding TaskBank.Categories}" SelectedItem="{Binding SelectedCategory}"/>
+                        <Image Source="chevron_down_v.png" HorizontalOptions="End" Margin="0,0,20,0" HeightRequest="25"/>
+                        <BoxView WidthRequest="110" HeightRequest="5" Margin="0,0,0,15" BackgroundColor="#bb85fc" VerticalOptions="End"/>
+                    </Grid>
+                </Frame>
+                <Frame Padding="-10" WidthRequest="100" HeightRequest="40" CornerRadius="28" BackgroundColor="#bb86fc" Grid.Column="1" HorizontalOptions="End">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding AddTaskCommand}"/>
+                    </Frame.GestureRecognizers>
+                    <Grid>
+                        <Label Text="+" VerticalOptions="Center" HorizontalOptions="Start"
+                           TextColor="Black" FontSize="30" Margin="20,0,0,0"/>
+                        <Label Text="Create" VerticalOptions="Center" HorizontalOptions="End"
+                           TextColor="Black" FontAttributes="Bold" Margin="0,0,25,0"/>
+                    </Grid>
+                </Frame>
+            </Grid>
+        </FlexLayout>
+        
+        
     </StackLayout>
+
 </ContentPage>

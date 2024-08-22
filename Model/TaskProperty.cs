@@ -24,12 +24,13 @@
     public partial class TaskBank : ObservableObject
     {
         [ObservableProperty]
-        public List<TaskProperty> tasks = new List<TaskProperty>();
+        private ObservableCollection<TaskProperty> tasks = [];
         [ObservableProperty]
-        public List<string> statuses = ["To do", "Progress", "Review", "Done"];
+        private ObservableCollection<string> statuses = ["To do", "Progress", "Review", "Done"];
         [ObservableProperty]
-        public List<string> category = ["Personal", "Work", "School"];
+        private ObservableCollection<string> categories = ["Personal", "Work", "School"];
         [ObservableProperty]
-        public List<string> priorities = ["Least", "Low", "Medium", "Hard", "Extreme"];
+        private ObservableCollection<string> priorities = ["Least", "Low", "Medium", "Hard", "Extreme"];
+
     }
 }

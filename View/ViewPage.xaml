@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="TodoList.View.ViewPage"
+             xmlns:ViewModel="clr-namespace:TodoList.ViewModel"
+             x:DataType="ViewModel:ViewPageViewModel"
+             BackgroundColor="#1e1e1e">
+
+    <FlexLayout WidthRequest="330" Direction="Column">
+        <Label Text="{Binding Task.Title}" BackgroundColor="Transparent" FontSize="22" Margin="5,0,0,5"/>
+        <Frame CornerRadius="2" HeightRequest="330" BackgroundColor="#383838" BorderColor="Transparent">
+            <Label Text="{Binding Task.Description}" BackgroundColor="Transparent"/>
+        </Frame>
+        <VerticalStackLayout HorizontalOptions="Start" Margin="0,5,0,5">
+            <Label Text="Status" Opacity="0.8" Margin="0,0,0,5" FontSize="16"/>
+            <Frame Padding="-10" HeightRequest="40" BackgroundColor="#bb85fc" WidthRequest="125" CornerRadius="2">
+                <Label Text="{Binding Task.Status}" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Center"/>
+            </Frame>
+        </VerticalStackLayout>
+        <HorizontalStackLayout>
+            <Label Text="Assignee: " Opacity="0.8" FontSize="16"/>
+            <Label Text="{Binding Task.Assignee}" VerticalOptions="Center" HorizontalOptions="Start"/>
+        </HorizontalStackLayout>
+        <VerticalStackLayout HorizontalOptions="Start" Margin="0,5,0,5">
+            <Label Text="Prority" Opacity="0.8" Margin="0,0,0,5" FontSize="16"/>
+            <Frame Padding="-10" HeightRequest="40" BackgroundColor="#bb85fc" WidthRequest="125" CornerRadius="2">
+                <Label Text="{Binding Task.Priority}" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Center"/>
+            </Frame>
+        </VerticalStackLayout>
+        <HorizontalStackLayout>
+            <Label Text="Date: " Opacity="0.8" FontSize="16"/>
+            <Label Text="{Binding Task.Date, StringFormat='{0:MM/dd/yyyy}'}" VerticalOptions="Center" HorizontalOptions="Start"/>
+        </HorizontalStackLayout>
+        <HorizontalStackLayout>
+            <Label Text="Due Date: " Opacity="0.8" FontSize="16"/>
+            <Label Text="{Binding Task.DueDate, StringFormat='{0:MM/dd/yyyy}'}" VerticalOptions="Center" HorizontalOptions="Start"/>
+        </HorizontalStackLayout>
+        <VerticalStackLayout HorizontalOptions="Start" Margin="0,5,0,5">
+            <Label Text="Category" Opacity="0.8" Margin="0,0,0,5" FontSize="16"/>
+            <Frame Padding="-10" HeightRequest="40" BackgroundColor="#bb85fc" WidthRequest="125" CornerRadius="2">
+                <Label Text="{Binding Task.Category}" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Center"/>
+            </Frame>
+        </VerticalStackLayout>
+    </FlexLayout>
+
+</ContentPage>

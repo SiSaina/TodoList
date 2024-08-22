@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Logging;
-using TodoList.View;
 using TodoList.ViewModel;
 
 namespace TodoList
@@ -24,8 +23,11 @@ namespace TodoList
             builder.Services.AddSingleton<MainPage>();
             builder.Services.AddSingleton<MainPageViewModel>();
 
-            builder.Services.AddTransient<AddTaskPage>();
-            builder.Services.AddTransient<AddTaskViewModel>();
+            builder.Services.AddTransient<ViewPage>();
+            builder.Services.AddTransient<ViewPageViewModel>();
+
+            builder.Services.AddTransient<ModifyPage>();
+            builder.Services.AddTransient<ModifyPageViewModel>();
 
             return builder.Build();
         }

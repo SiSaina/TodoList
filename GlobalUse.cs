@@ -8,3 +8,5 @@ global using CommunityToolkit.Mvvm.Input;
 global using System.Collections.ObjectModel;
 global using TodoList.Model;
 global using TodoList.View;
+global using Microsoft.VisualBasic;
+global using static System.Runtime.InteropServices.JavaScript.JSType;

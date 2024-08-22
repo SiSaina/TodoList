@@ -64,7 +64,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="View\AddTaskPage.xaml">
+	  <MauiXaml Update="View\ModifyPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="View\ViewPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
